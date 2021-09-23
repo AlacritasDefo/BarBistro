@@ -78,4 +78,14 @@ public class Dish implements IDish {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                ", ingredients=" + ingredients +
+                '}';
+    }
 }

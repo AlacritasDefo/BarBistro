@@ -12,11 +12,26 @@ public class Order {
         this.dish = dish;
         this.client = client;
         this.waiter = waiter;
+        waiter.addTotalRevenue(dish.getPrice());
     }
 
     public Double getTotalPrice() {
         waiter.addTotalRevenue(dish.getPrice());
         return dish.getPrice();
 //        TODO: uwzględnić Bonusy
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "time=" + time +
+                ", dish=" + dish +
+                ", client=" + client +
+                ", waiter=" + waiter +
+                '}';
     }
 }

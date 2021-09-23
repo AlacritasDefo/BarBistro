@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -57,11 +58,11 @@ public class Bistro {
 
     }
 
-    public void addOrderS(Order ... orderList){
+    public void addOrderS(Order... orderList) {
         orders.addAll(List.of(orderList));
     }
 
-    public void addToMenu(Dish id){
+    public void addToMenu(Dish id) {
         menu.add(id);
     }
 
@@ -73,36 +74,36 @@ public class Bistro {
         orders.add(order);
     }
 
-    public List<Waiter> getWaiters(){
-       return waiters;
+    public List<Waiter> getWaiters() {
+        return waiters;
     }
 
-    public void setWaiters(List<Waiter> waiters){
+    public void setWaiters(List<Waiter> waiters) {
         this.waiters = waiters;
     }
 
-    public void setWaiters(Waiter ... waiterList){
+    public void setWaiters(Waiter... waiterList) {
         waiters = List.of(waiterList);
     }
 
-    public void sort(Comparator<Order> comparator){
+    public void sort(Comparator<Order> comparator) {
         Collections.sort(orders, comparator);
     }
 
-    public Iterator<Order> iterator(){
+    public Iterator<Order> iterator() {
         return new OrderIterator(orders);
     }
 
-    public double getAveragePrice(DishCategory category){
+    public double getAveragePrice(DishCategory category) {
         double avaragePrice = menu.stream()
                 .filter(d -> d.getCategory() == category)
                 .mapToDouble(IDish::getPrice)
                 .average()
                 .getAsDouble();
-                return avaragePrice;
+        return avaragePrice;
     }
 
-    public double getAveragePriceFromOrders(DishCategory category){
+    public double getAveragePriceFromOrders(DishCategory category) {
         double avaragePrice = orders.stream()
                 .filter(d -> d.dish.getCategory() == category)
                 .mapToDouble(Order::getTotalPrice)
@@ -126,17 +127,19 @@ public class Bistro {
         writer.write(tekst);
         writer.close();
     }
+
     /*showGroupsOfDishes() – Wyświetlenie dań z menu pogrupowanych wg kategorii dań*/
-    public void showGrupsOfDishes(){
+    public void showGrupsOfDishes() {
         Map<DishCategory, List<Dish>> grupingMenu = menu.stream()
                 .collect(Collectors.groupingBy(Dish::getCategory));
-        for (Map.Entry<DishCategory, List<Dish>> i :grupingMenu.entrySet()) {
-            System.out.println("Kategoria dań: "+i.getKey());
+        for (Map.Entry<DishCategory, List<Dish>> i : grupingMenu.entrySet()) {
+            System.out.println("Kategoria dań: " + i.getKey());
             for (Dish d : i.getValue()) {
-                System.out.println("Nazwa dania: "+d.getName()+" ,cena: "+d.getPrice()+" ,kaloryczność: "+d.getCalories());
+                System.out.println("Nazwa dania: " + d.getName() + " ,cena: " + d.getPrice() + " ,kaloryczność: " + d.getCalories());
             }
         }
     }
+
     /*showTheMostPopularIngredients() - Wyświetlenie składników, których waga we wszystkich daniach była najwyższa*/
     public void showTheMostPopularIngredients() {
         Map<String, Double> mapOfHevyWeightIngredients = new HashMap<String, Double>();
@@ -150,15 +153,39 @@ public class Bistro {
                     mapOfHevyWeightIngredients.put(i.getName(), i.getWeight());
                 }
             }
-        }
-        //Collection<Double> sorted = mapOfHevyWeightIngredients.values();
+        }   //Collection<Double> sorted = mapOfHevyWeightIngredients.values();
         String name = "";
         double maxWeight = 0;
-        for(Map.Entry<String, Double> e : mapOfHevyWeightIngredients.entrySet())
-        if (e.getValue() > maxWeight) {
-            name = e.getKey();
-            maxWeight = e.getValue();
-        }
+        for (Map.Entry<String, Double> e : mapOfHevyWeightIngredients.entrySet())
+            if (e.getValue() > maxWeight) {
+                name = e.getKey();
+                maxWeight = e.getValue();
+            }
+    }
+
+
+
+    public void addOrders (Order...orders){
+        this.orders.addAll(Set.of(orders));}
+
+    public void showWaiters (){
+        System.out.println("Kelnerzy pracujacy w barze "+ name + " : " + waiters);
+    }
+
+    public double getTotalRevenue(){
+        double sumaObrotow = 0;
+        for (Waiter w : waiters){
+            sumaObrotow += w.totalRevenue;
+        }return sumaObrotow;
+    }
+
+    public void  showClientsSortedByAmountOfOrders() throws ExecutionControl.NotImplementedException {
+        throw new ExecutionControl.NotImplementedException("Not Implemented");
+    }
+
+    public void showOrdersGroupedByClients(){
+        Map<Client, List<Order> > orderMap = orders.stream().collect(Collectors.groupingBy(Order::getClient));
+        System.out.println(orderMap);
     }
 
     @Override

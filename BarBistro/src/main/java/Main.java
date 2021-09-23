@@ -48,7 +48,30 @@ public class Main {
             System.out.println(e.getMessage());
         }
         bistro.showGrupsOfDishes();
+
+        Client c1 = new Client("Jan", "Nowak");
+        Client c2 = new Client("Sylwia", "Kowalczyk");
+        Client c3 = new Client("Jerzy", "Malicki");
+        Client c4 = new Client("Dorota", "Nowakowska");
+        Client c5 = new Client("Adam", "Wagner");
+        Waiter kelner1 = new Waiter("Jan", "Tomalak");
+        Waiter kelner2 = new Waiter("Hanna", "Kobielska");
+        Waiter kelner3 = new Waiter("Roman", "Polak");
+        bistro.setWaiters(kelner1, kelner2, kelner3);
+        Order o1 = new Order(dish1, c1, kelner1);
+        Order o2 = new Order(sd2, c2, kelner2);
+        Order o3 = new Order(sd2, c3, kelner1);
+        Order o4 = new Order(d4, c3, kelner3);
+        Order o5 = new Order(sd2, c4, kelner1);
+        Order o6 = new Order(d4, c2, kelner1);
+        Order o7 = new Order(dish1, c5, kelner2);
+        bistro.addOrders(o1, o2, o3, o4, o5, o6, o7);
+
+        System.out.println("Obroty wynosza " + bistro.getTotalRevenue());
+        bistro.showOrdersGroupedByClients();
+
+
+
+
     }
-
-
 }
