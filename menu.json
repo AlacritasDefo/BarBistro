@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Kotel sojowy",
+    "price": 20.0,
+    "category": "Vege",
+    "ingredients": [
+      {
+        "name": "Mąka",
+        "weight": 1.0,
+        "calories": 600
+      }
+    ]
+  },
+  {
+    "name": "pulpet poczdamski",
+    "price": 18.2,
+    "category": "Meat",
+    "ingredients": [
+      {
+        "name": "ziemniaki",
+        "weight": 250.0,
+        "calories": 300
+      },
+      {
+        "name": "cebula",
+        "weight": 50.0,
+        "calories": 100
+      }
+    ]
+  },
+  {
+    "name": "Jabłecznik",
+    "price": 15.4,
+    "category": "FlourDish",
+    "ingredients": [
+      {
+        "name": "Jabłko",
+        "weight": 3.5,
+        "calories": 200
+      },
+      {
+        "name": "Jajko",
+        "weight": 0.3,
+        "calories": 50
+      },
+      {
+        "name": "Mąka",
+        "weight": 1.0,
+        "calories": 600
+      }
+    ]
+  }
+]

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Bistro {
 
@@ -124,6 +125,39 @@ public class Bistro {
         FileWriter writer = new FileWriter(new File(fileName));
         writer.write(tekst);
         writer.close();
+    }
+    /*showGroupsOfDishes() – Wyświetlenie dań z menu pogrupowanych wg kategorii dań*/
+    public void showGrupsOfDishes(){
+        Map<DishCategory, List<Dish>> grupingMenu = menu.stream()
+                .collect(Collectors.groupingBy(Dish::getCategory));
+        for (Map.Entry<DishCategory, List<Dish>> i :grupingMenu.entrySet()) {
+            System.out.println("Kategoria dań: "+i.getKey());
+            for (Dish d : i.getValue()) {
+                System.out.println("Nazwa dania: "+d.getName()+" ,cena: "+d.getPrice()+" ,kaloryczność: "+d.getCalories());
+            }
+        }
+    }
+    /*showTheMostPopularIngredients() - Wyświetlenie składników, których waga we wszystkich daniach była najwyższa*/
+    public void showTheMostPopularIngredients(){
+        Map<String, Double> mapOfHevyWeightIngredients = new TreeMap<String,Double>(new Comparator<Map.Entry<String,Double>>(){
+        public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2)
+            {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        /*for (Dish d:menu) {
+            for (Ingredient i:d.getIngedients()) {
+                if(mapOfHevyWeightIngredients.containsKey(i.getName())){
+                    double w = mapOfHevyWeightIngredients.get(i.getName())+i.getWeight();
+                    mapOfHevyWeightIngredients.put(i.getName(),w);
+                }
+                else {
+                    double w = mapOfHevyWeightIngredients.get(i.getName())+i.getWeight();
+                    mapOfHevyWeightIngredients.put(i.getName(),i.getWeight());
+                }
+            }
+        }*/
+        Map <String, Double> map = mapOfHevyWeightIngredients.entrySet().stream().sorted((p1,p2)->(int)(p2.getValue()-p1.getValue())).mapToInt().collect(Collectors.toList());
     }
 
 
