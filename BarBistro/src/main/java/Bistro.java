@@ -138,28 +138,22 @@ public class Bistro {
         }
     }
     /*showTheMostPopularIngredients() - Wyświetlenie składników, których waga we wszystkich daniach była najwyższa*/
-    public void showTheMostPopularIngredients(){
-        Map<String, Double> mapOfHevyWeightIngredients = new TreeMap<String,Double>(new Comparator<Map.Entry<String,Double>>(){
-        public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2)
-            {
-                return o1.getValue().compareTo(o2.getValue());
+    public void showTheMostPopularIngredients() {
+        Map<String, Double> mapOfHevyWeightIngredients = new HashMap<String, Double>();
+        for (Dish d : menu) {
+            for (Ingredient i : d.getIngedients()) {
+                if (mapOfHevyWeightIngredients.containsKey(i.getName())) {
+                    double w = mapOfHevyWeightIngredients.get(i.getName()) + i.getWeight();
+                    mapOfHevyWeightIngredients.put(i.getName(), w);
+                } else {
+                    double w = mapOfHevyWeightIngredients.get(i.getName()) + i.getWeight();
+                    mapOfHevyWeightIngredients.put(i.getName(), i.getWeight());
+                }
             }
         }
+        Collection<Double> sorted = mapOfHevyWeightIngredients.values();
+        System.out.println(sorted);
     }
-        /*for (Dish d:menu) {
-            for (Ingredient i:d.getIngedients()) {
-                if(mapOfHevyWeightIngredients.containsKey(i.getName())){
-                    double w = mapOfHevyWeightIngredients.get(i.getName())+i.getWeight();
-                    mapOfHevyWeightIngredients.put(i.getName(),w);
-                }
-                else {
-                    double w = mapOfHevyWeightIngredients.get(i.getName())+i.getWeight();
-                    mapOfHevyWeightIngredients.put(i.getName(),i.getWeight());
-                }
-            }
-        }
-        Map <String, Double> map = mapOfHevyWeightIngredients.entrySet().stream().sorted((p1,p2)->(int)(p2.getValue()-p1.getValue())).mapToInt().collect(Collectors.toList());
-    }*/
 
     @Override
     public String toString() {
