@@ -144,7 +144,8 @@ public class Bistro {
             {
                 return o1.getValue().compareTo(o2.getValue());
             }
-        });
+        }
+    }
         /*for (Dish d:menu) {
             for (Ingredient i:d.getIngedients()) {
                 if(mapOfHevyWeightIngredients.containsKey(i.getName())){
@@ -156,15 +157,9 @@ public class Bistro {
                     mapOfHevyWeightIngredients.put(i.getName(),i.getWeight());
                 }
             }
-        }*/
+        }
         Map <String, Double> map = mapOfHevyWeightIngredients.entrySet().stream().sorted((p1,p2)->(int)(p2.getValue()-p1.getValue())).mapToInt().collect(Collectors.toList());
-    }
-
-
-
-
-
-
+    }*/
 
     @Override
     public String toString() {
