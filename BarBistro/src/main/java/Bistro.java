@@ -151,8 +151,14 @@ public class Bistro {
                 }
             }
         }
-        Collection<Double> sorted = mapOfHevyWeightIngredients.values();
-        System.out.println(sorted);
+        //Collection<Double> sorted = mapOfHevyWeightIngredients.values();
+        String name = "";
+        double maxWeight = 0;
+        for(Map.Entry<String, Double> e : mapOfHevyWeightIngredients.entrySet())
+        if (e.getValue() > maxWeight) {
+            name = e.getKey();
+            maxWeight = e.getValue();
+        }
     }
 
     @Override
