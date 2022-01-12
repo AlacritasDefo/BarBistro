@@ -2,7 +2,6 @@ public class Bonus implements IBonus{
 
     private double discountQuote;
     private DishCategory category;
-
     public Bonus(double discountQuote, DishCategory category) {
         this.discountQuote = discountQuote;
         this.category = category;

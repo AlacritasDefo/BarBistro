@@ -70,8 +70,5 @@ public class Main {
         System.out.println("Obroty wynosza " + bistro.getTotalRevenue());
         bistro.showOrdersGroupedByClients();
 
-
-
-
     }
 }

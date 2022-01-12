@@ -3,8 +3,6 @@ import java.util.Random;
 public class Client extends Person{
 
     IBonus bonus;
-
-
     public IBonus getBonus() {
         return bonus;
     }

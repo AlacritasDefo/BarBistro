@@ -8,7 +8,6 @@ public class Dish implements IDish {
     private DishCategory category;
     private List<Ingredient> ingredients;
 
-
     @Override
     public double getWeight() {
         double totalWeight = 0;
